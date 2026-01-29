@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presencia60 - Sistema de gestión de trabajo híbrido">
+    <title>Presencia60 | Control de Trabajo Híbrido</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔴</text></svg>">
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="container">
+                <div class="header__content">
+                    <div class="header__brand">
+                        <div>
+                            <h1 class="header__title">Inetsat</h1>
+                            <p class="header__subtitle">Control de Trabajo Híbrido</p>
+                        </div>
+                    </div>
+                    <div class="header__date" id="current-date">Cargando...</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <div class="grid grid--2cols">
+                    <div>
+                        <div class="card">
+                            <div class="card__header">
+                                <span class="card__icon">⚡</span>
+                                <h2 class="card__title">Fichaje Rápido</h2>
+                            </div>
+                            <div class="checkin-grid">
+                                <button class="checkin-btn checkin-btn--office" id="btn-office">
+                                    <span class="checkin-btn__icon">🏢</span>
+                                    <span class="checkin-btn__label">Oficina</span>
+                                    <span class="checkin-btn__sublabel">Trabajo presencial</span>
+                                </button>
+                                <button class="checkin-btn checkin-btn--remote" id="btn-remote">
+                                    <span class="checkin-btn__icon">🏠</span>
+                                    <span class="checkin-btn__label">Teletrabajo</span>
+                                    <span class="checkin-btn__sublabel">Trabajo remoto</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card mt-6">
+                            <div class="card__header">
+                                <span class="card__icon">📅</span>
+                                <h2 class="card__title">Gestión de Licencias</h2>
+                            </div>
+                            <form class="license-form" id="license-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="license-date">Fecha</label>
+                                    <input type="date" class="form-input" id="license-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="license-type">Tipo de licencia</label>
+                                    <select class="form-select" id="license-type">
+                                        <option value="Vacaciones">🏖️ Vacaciones</option>
+                                        <option value="Enfermedad">🏥 Enfermedad</option>
+                                        <option value="Estudio">📚 Día de estudio</option>
+                                        <option value="Personal">👤 Asunto personal</option>
+                                        <option value="Otro">📋 Otro</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--block">Registrar Licencia</button>
+                            </form>
+                            <div class="license-list" id="license-list"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card">
+                            <div class="card__header">
+                                <span class="card__icon">📊</span>
+                                <h2 class="card__title">Dashboard</h2>
+                            </div>
+                            <div class="progress-circle">
+                                <svg class="progress-circle__svg" viewBox="0 0 200 200">
+                                    <circle class="progress-circle__bg" cx="100" cy="100" r="80" />
+                                    <circle class="progress-circle__progress" id="progress-circle" cx="100" cy="100"
+                                        r="80" stroke-dasharray="502.65" stroke-dashoffset="502.65" />
+                                </svg>
+                                <div class="progress-circle__content">
+                                    <div class="progress-circle__value" id="progress-value">0%</div>
+                                    <div class="progress-circle__label">Presencialidad</div>
+                                </div>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat">
+                                    <div class="stat__value stat__value--primary" id="stat-office">0</div>
+                                    <div class="stat__label">Días en oficina</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat__value" id="stat-remote">0</div>
+                                    <div class="stat__label">Días en remoto</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat__value stat__value--primary" id="stat-remaining">0</div>
+                                    <div class="stat__label">Días oficina necesarios</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat__value" id="stat-days-left">0</div>
+                                    <div class="stat__label">Días restantes</div>
+                                </div>
+                            </div>
+                            <div class="alert alert--success mt-4" id="status-alert">
+                                <span class="alert__icon">📊</span>
+                                <span class="alert__text">Registra tu primer día para ver las métricas</span>
+                            </div>
+                            <div class="suggestion">
+                                <div class="suggestion__header"><span>💡</span><span>Sugerencia</span></div>
+                                <p class="suggestion__text" id="suggestion-text">Registra tus días para recibir
+                                    recomendaciones</p>
+                            </div>
+                        </div>
+
+                        <div class="card mt-6">
+                            <div class="card__header">
+                                <span class="card__icon">📅</span>
+                                <h2 class="card__title">Calendario</h2>
+                            </div>
+                            <div class="calendar-mini">
+                                <div class="calendar-mini__header">
+                                    <button class="calendar-mini__nav-btn" id="cal-prev">◀</button>
+                                    <span class="calendar-mini__title" id="calendar-title">Enero 2026</span>
+                                    <button class="calendar-mini__nav-btn" id="cal-next">▶</button>
+                                </div>
+                                <div class="calendar-mini__grid" id="calendar-grid"></div>
+                            </div>
+                            <div class="legend">
+                                <div class="legend__item">
+                                    <div class="legend__color legend__color--office"></div><span>Oficina</span>
+                                </div>
+                                <div class="legend__item">
+                                    <div class="legend__color legend__color--remote"></div><span>Remoto</span>
+                                </div>
+                                <div class="legend__item">
+                                    <div class="legend__color legend__color--license"></div><span>Licencia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>Presencia60 © 2026 — Gestión de Trabajo Híbrido</p>
+            </div>
+        </footer>
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+    <script src="js/calculations.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
